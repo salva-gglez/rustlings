@@ -3,17 +3,49 @@
 // can offer. Follow the steps to complete the exercise.
 // As always, there are hints if you execute `rustlings hint iterators2`!
 
-// I AM NOT DONE
-
 // Step 1.
 // Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
+    let mut resultStr = String::new();
+
     match c.next() {
         None => String::new(),
-        Some(first) => ???,
+        Some(first) => {
+            match first {
+                'h' => resultStr.push('H'),
+                'w' => resultStr.push('W'),
+                _ => resultStr.push(' '),
+            }
+            //let charUppercase = ((first as u8) + 55) as char;
+            //resultStr.push('H'); //charUppercase);
+            while let others = c.next() {
+                match others {
+                    None => break,
+                    Some(rest) => resultStr.push(rest),
+                }
+            }
+            //println!("{}", charUppercase);
+            //return String::new();
+            resultStr
+        },
     }
+    
+    // let firstChar: bool = true;
+    // for ch in c {
+    //     if firstChar {
+    //         // match c.next() {
+    //         // None => String::new(),
+    //         // Some(first) => {
+    //         //     let newChar: u8 = (first as u8) + 55;
+    //         //     resultStr.push(newChar as char)
+    //         // },
+    //         firstChar = false;
+    //     } else {
+    //         resultStr.push(ch);
+    //     }
+    // }
 }
 
 // Step 2.
@@ -21,7 +53,14 @@ pub fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    vec![]
+    let mut newVec = Vec::new();
+
+    for word in words {
+        let newWord = capitalize_first(word);
+        newVec.push(newWord);
+    }
+    //vec![]
+    newVec
 }
 
 // Step 3.
@@ -29,7 +68,15 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
-    String::new()
+    //String::new()
+    let mut newPhrase = String::new();
+
+    for word in words {
+        let capitalizedWord = capitalize_first(word);
+        newPhrase.push_str(&capitalizedWord);
+    }
+
+    newPhrase
 }
 
 #[cfg(test)]
